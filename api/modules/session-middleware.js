@@ -16,24 +16,24 @@ dotenv.config();
 */
 
 const serverSessionSecret = () => {
-  if (
-    !process.env["SERVER_SESSION_SECRET"] ||
-    process.env["SERVER_SESSION_SECRET"].length < 8 ||
-    process.env["SERVER_SESSION_SECRET"] === warnings.exampleBadSecret
-  ) {
-    // Warning if user doesn't have a good secret
-    console.log(warnings.badSecret);
-  }
+	if (
+		!process.env["SERVER_SESSION_SECRET"] ||
+		process.env["SERVER_SESSION_SECRET"].length < 8 ||
+		process.env["SERVER_SESSION_SECRET"] === warnings.exampleBadSecret
+	) {
+		// Warning if user doesn't have a good secret
+		console.log(warnings.badSecret);
+	}
 
-  return process.env["SERVER_SESSION_SECRET"];
+	return process.env["SERVER_SESSION_SECRET"];
 };
 
 export default session({
-  secret: serverSessionSecret() || "secret",
-  resave: false,
-  saveUninitialized: false,
-  cookie: {
-    secure: false,
-    maxAge: 1000 * 60 * 60 * 24 * 7, // Set to 7 days - 1000ms * 60 seconds * 60 minutes * 24 hours * 7 days
-  },
+	secret: serverSessionSecret() || "secret",
+	resave: false,
+	saveUninitialized: false,
+	cookie: {
+		secure: false,
+		maxAge: 1000 * 60 * 60 * 24 * 7, // Set to 7 days - 1000ms * 60 seconds * 60 minutes * 24 hours * 7 days
+	},
 });
